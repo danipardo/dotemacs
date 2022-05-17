@@ -21,6 +21,7 @@
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 (setq xref-show-definitions-function #'xref-show-definitions-completing-read)
 
+(setq helm-full-frame t)
 
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -52,12 +53,18 @@ There are two things you can do about this warning:
   (require 'use-package))
 
 
+(setq blink-cursor-blinks 0)
+
+(add-to-list 'load-path "/home/dani/.emacs.d/lisp")
+
+(require 'php-cs-fixer)
+
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
-(blink-cursor-mode -1)
+(blink-cursor-mode 1)
 
-(global-hl-line-mode +1)
+(global-hl-line-mode +0)
 (line-number-mode +1)
 (global-display-line-numbers-mode 1)
 (column-number-mode t)
@@ -105,7 +112,7 @@ There are two things you can do about this warning:
   :bind (("C-M-g" . magit-status)))
 
 
-(setq projectile-project-search-path '("/opt/inmensys/projectes"))
+
 
 
 (use-package projectile
@@ -118,6 +125,7 @@ There are two things you can do about this warning:
   :config
   (projectile-mode +1)
   )
+(setq projectile-project-search-path '("/opt/inmensys/projectes"))
 
 (use-package helm
   :ensure t
@@ -155,12 +163,16 @@ There are two things you can do about this warning:
 (add-to-list 'load-path "/home/dani/.emacs.d/neotree")
 (require 'neotree)
 
+
+
+
 (require 'iedit)
 
 (global-set-key (kbd "C-l") 'bs-cycle-next)
 (global-set-key (kbd "C-j") 'bs-cycle-previous)
 
 
+(global-set-key (kbd "C-f") 'helm-occur-from-isearch)
 
 (global-set-key [f8] 'neotree-toggle)
 (defun bf-pretty-print-xml-region (begin end)
@@ -201,7 +213,7 @@ by using nxml's indentation rules."
   (setq foo (concat "gcc " (buffer-name) " && ./a.out" ))
   (shell-command foo))
 
-
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
  
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -214,11 +226,14 @@ by using nxml's indentation rules."
    ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(custom-enabled-themes '(misterioso))
  '(custom-safe-themes
-   '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "b9e9ba5aeedcc5ba8be99f1cc9301f6679912910ff92fdf7980929c2fc83ab4d" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))
+   '("7661b762556018a44a29477b84757994d8386d6edee909409fabe0631952dad9" "fc48cc3bb3c90f7761adf65858921ba3aedba1b223755b5924398c666e78af8b" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "b9e9ba5aeedcc5ba8be99f1cc9301f6679912910ff92fdf7980929c2fc83ab4d" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))
+ '(elfeed-feeds '("gemini://smol.pub/atom.xml"))
  '(inhibit-startup-screen t)
  '(org-agenda-files '("/opt/inmensys/documents/worklog.org"))
  '(package-selected-packages
-   '(lsp-mode req-package neotree php-mode php-runtime dumb-jump multi-web-mode yasnippet-snippets fold-this flycheck-rust auto-yasnippet rustic zzz-to-char rust-mode iedit smart-mode-line-powerline-theme flycheck lsp-ui eglot highlight-symbol git-timemachine wanderlust mu4e-conversation smartparens treemacs cycbuf web-mode elscreen tabbar lsp-javacomp helm-projectile projectile-speedbar lsp-java php-boris-minor-mode lsp-php all-the-icons smart-region color-theme-solarized ivy expand-region helm-swoop git-gutter magit vue-mode semi multiple-cursors jabber company-irony))
+   '(twig-mode helm-ag ag ripgrep rg elfeed-dashboard elfeed ace-jump-helm-line ace-jump-mode elpher gruvbox-theme zenburn-theme vscode-dark-plus-theme lsp-mode req-package neotree php-mode php-runtime dumb-jump multi-web-mode yasnippet-snippets fold-this flycheck-rust auto-yasnippet rustic zzz-to-char rust-mode iedit smart-mode-line-powerline-theme flycheck lsp-ui eglot highlight-symbol git-timemachine wanderlust mu4e-conversation smartparens treemacs cycbuf web-mode elscreen tabbar lsp-javacomp helm-projectile projectile-speedbar lsp-java php-boris-minor-mode lsp-php all-the-icons smart-region color-theme-solarized ivy expand-region helm-swoop git-gutter magit vue-mode semi multiple-cursors jabber company-irony))
+ '(php-cs-fixer-rules-fixer-part-options
+   '("multiline_whitespace_before_semicolons" "concat_space" "allow_single_line_closure" "allow_single_line_anonymous_class_with_empty_body"))
  '(projectile-enable-caching nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -284,3 +299,14 @@ by using nxml's indentation rules."
 
 
 (use-package flycheck :ensure)
+
+
+(defun eslint-fix-file ()
+  (interactive)
+  (message "eslint --fixing the file" (buffer-file-name))
+  (shell-command (concat "phpcsfixer.php fix " (buffer-file-name))))
+
+
+
+(set-cursor-color "#b703df") 
+
