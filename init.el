@@ -12,7 +12,7 @@
 
 
 
-
+(use-package ace-jump-buffer :ensure t)
 
 (setq-default indent-tabs-mode nil)
 (setq-default line-spacing 3)
@@ -93,12 +93,13 @@ There are two things you can do about this warning:
   ("C-=" . avy-goto-char)
   :config
   (setq avy-background t))
-
+(setq lsp-rust-analyzer-server-display-inlay-hints t)
 (use-package company
   :ensure t
   :diminish company-mode
   :config
   (add-hook 'after-init-hook #'global-company-mode))
+;;  (add-hook 'after-init-hook #'global-company-mode))
 
 (use-package flycheck
   :ensure t
@@ -125,7 +126,8 @@ There are two things you can do about this warning:
   :config
   (projectile-mode +1)
   )
-(setq projectile-project-search-path '("/opt/inmensys/projectes"))
+; (setq projectile-project-search-path '("/opt/inmensys/projectes"))
+(setq projectile-project-search-path '(("/opt/inmensys/projectes" . 1)))
 
 (use-package helm
   :ensure t
@@ -135,7 +137,7 @@ There are two things you can do about this warning:
   ("C-x C-f" . helm-find-files)
   ("M-y" . helm-show-kill-ring)
   ("C-x b" . helm-mini)
-  ("C-0" . helm-buffers-list)
+  ("C-0" . ace-jump-buffer)
   
   :config
   (require 'helm-config)
@@ -146,7 +148,7 @@ There are two things you can do about this warning:
   (setq helm-autoresize-min-height 20)
   (helm-autoresize-mode 1)
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
+
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
   )
 
@@ -172,7 +174,7 @@ There are two things you can do about this warning:
 (global-set-key (kbd "C-j") 'bs-cycle-previous)
 
 
-(global-set-key (kbd "C-f") 'helm-occur-from-isearch)
+(global-set-key (kbd "C-f") 'helm-occur)
 
 (global-set-key [f8] 'neotree-toggle)
 (defun bf-pretty-print-xml-region (begin end)
@@ -226,15 +228,16 @@ by using nxml's indentation rules."
    ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(custom-enabled-themes '(misterioso))
  '(custom-safe-themes
-   '("7661b762556018a44a29477b84757994d8386d6edee909409fabe0631952dad9" "fc48cc3bb3c90f7761adf65858921ba3aedba1b223755b5924398c666e78af8b" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "b9e9ba5aeedcc5ba8be99f1cc9301f6679912910ff92fdf7980929c2fc83ab4d" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))
- '(elfeed-feeds '("gemini://smol.pub/atom.xml"))
+   '("cf922a7a5c514fad79c483048257c5d8f242b21987af0db813d3f0b138dfaf53" "c4063322b5011829f7fdd7509979b5823e8eea2abf1fe5572ec4b7af1dd78519" "f91395598d4cb3e2ae6a2db8527ceb83fed79dbaf007f435de3e91e5bda485fb" "da186cce19b5aed3f6a2316845583dbee76aea9255ea0da857d1c058ff003546" "a9a67b318b7417adbedaab02f05fa679973e9718d9d26075c6235b1f0db703c8" "0d01e1e300fcafa34ba35d5cf0a21b3b23bc4053d388e352ae6a901994597ab1" "3319c893ff355a88b86ef630a74fad7f1211f006d54ce451aab91d35d018158f" "1d5e33500bc9548f800f9e248b57d1b2a9ecde79cb40c0b1398dec51ee820daf" "234dbb732ef054b109a9e5ee5b499632c63cc24f7c2383a849815dacc1727cb6" "7a7b1d475b42c1a0b61f3b1d1225dd249ffa1abb1b7f726aec59ac7ca3bf4dae" "6c4c97a17fc7b6c8127df77252b2d694b74e917bab167e7d3b53c769a6abb6d6" "e8a0c94af8c0eeec7ae0f1633d29098ea722e5765f1e9c67b49da6f3414b9bfe" "7661b762556018a44a29477b84757994d8386d6edee909409fabe0631952dad9" "fc48cc3bb3c90f7761adf65858921ba3aedba1b223755b5924398c666e78af8b" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "b9e9ba5aeedcc5ba8be99f1cc9301f6679912910ff92fdf7980929c2fc83ab4d" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))
+ '(elfeed-feeds
+   '("https://www.reddit.com/r/PixelArt.rss" "https://planet.emacslife.com/atom.xml" "https://users.rust-lang.org/c/help.rss" "http://www.reddit.com/r/programming/.xml" "gemini://smol.pub/atom.xml"))
  '(inhibit-startup-screen t)
  '(org-agenda-files '("/opt/inmensys/documents/worklog.org"))
  '(package-selected-packages
-   '(twig-mode helm-ag ag ripgrep rg elfeed-dashboard elfeed ace-jump-helm-line ace-jump-mode elpher gruvbox-theme zenburn-theme vscode-dark-plus-theme lsp-mode req-package neotree php-mode php-runtime dumb-jump multi-web-mode yasnippet-snippets fold-this flycheck-rust auto-yasnippet rustic zzz-to-char rust-mode iedit smart-mode-line-powerline-theme flycheck lsp-ui eglot highlight-symbol git-timemachine wanderlust mu4e-conversation smartparens treemacs cycbuf web-mode elscreen tabbar lsp-javacomp helm-projectile projectile-speedbar lsp-java php-boris-minor-mode lsp-php all-the-icons smart-region color-theme-solarized ivy expand-region helm-swoop git-gutter magit vue-mode semi multiple-cursors jabber company-irony))
- '(php-cs-fixer-rules-fixer-part-options
-   '("multiline_whitespace_before_semicolons" "concat_space" "allow_single_line_closure" "allow_single_line_anonymous_class_with_empty_body"))
- '(projectile-enable-caching nil))
+   '(ace-jump-buffer ace-window frog-jump-buffer drag-stuff adoc-mode asciidoc sticky doom-themes mood-one-theme twig-mode helm-ag ag ripgrep rg elfeed-dashboard elfeed ace-jump-helm-line ace-jump-mode elpher gruvbox-theme zenburn-theme vscode-dark-plus-theme lsp-mode req-package neotree php-mode php-runtime dumb-jump multi-web-mode yasnippet-snippets fold-this flycheck-rust auto-yasnippet rustic zzz-to-char rust-mode iedit smart-mode-line-powerline-theme flycheck lsp-ui eglot highlight-symbol git-timemachine wanderlust mu4e-conversation smartparens treemacs cycbuf web-mode elscreen tabbar lsp-javacomp helm-projectile projectile-speedbar lsp-java php-boris-minor-mode lsp-php all-the-icons smart-region color-theme-solarized ivy expand-region helm-swoop git-gutter magit vue-mode semi multiple-cursors jabber company-irony))
+ '(php-cs-fixer-rules-fixer-part-options '("multiline_whitespace_before_semicolons" "concat_space"))
+ '(projectile-enable-caching nil)
+ '(warning-suppress-types '((lsp-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -253,6 +256,8 @@ by using nxml's indentation rules."
   (shell-command foo))
 
 (global-set-key [C-f1] 'execute-c-program)
+(global-set-key [c-i] 'lsp-find-definition)
+
 
 
 
@@ -270,7 +275,7 @@ by using nxml's indentation rules."
 
 
 (use-package lsp-mode
-  :ensure
+  :ensure t
   :commands lsp
   :custom
   ;; what to use when checking on-save. "check" is default, I prefer clippy
@@ -278,7 +283,7 @@ by using nxml's indentation rules."
   (lsp-eldoc-render-all t)
   (lsp-idle-delay 0.6)
   ;; enable / disable the hints as you prefer:
-  (lsp-rust-analyzer-server-display-inlay-hints t)
+ ;;  (lsp-rust-analyzer-server-display-inlay-hints t)
   (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
   (lsp-rust-analyzer-display-chaining-hints t)
   (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
@@ -286,7 +291,15 @@ by using nxml's indentation rules."
   (lsp-rust-analyzer-display-parameter-hints nil)
   (lsp-rust-analyzer-display-reborrow-hints nil)
   :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+
+  )
+
+(setq lsp-enable-file-watchers nil)
+
+
+(add-hook 'rust-mode-hook #'lsp-deferred)
+(add-hook 'php-mode-hook #'lsp-deferred)
 
 (use-package lsp-ui
   :ensure
@@ -310,3 +323,4 @@ by using nxml's indentation rules."
 
 (set-cursor-color "#b703df") 
 
+(put 'dired-find-alternate-file 'disabled nil)
