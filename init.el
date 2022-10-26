@@ -172,6 +172,8 @@ There are two things you can do about this warning:
 
 (global-set-key (kbd "C-l") 'bs-cycle-next)
 (global-set-key (kbd "C-j") 'bs-cycle-previous)
+(global-set-key (kbd "C-M-s-a") 'list-bookmarks)
+(global-set-key (kbd "C-M-s-r") 'helm-projectile-rg)
 
 
 (global-set-key (kbd "C-f") 'helm-occur)
@@ -230,11 +232,12 @@ by using nxml's indentation rules."
  '(custom-safe-themes
    '("cf922a7a5c514fad79c483048257c5d8f242b21987af0db813d3f0b138dfaf53" "c4063322b5011829f7fdd7509979b5823e8eea2abf1fe5572ec4b7af1dd78519" "f91395598d4cb3e2ae6a2db8527ceb83fed79dbaf007f435de3e91e5bda485fb" "da186cce19b5aed3f6a2316845583dbee76aea9255ea0da857d1c058ff003546" "a9a67b318b7417adbedaab02f05fa679973e9718d9d26075c6235b1f0db703c8" "0d01e1e300fcafa34ba35d5cf0a21b3b23bc4053d388e352ae6a901994597ab1" "3319c893ff355a88b86ef630a74fad7f1211f006d54ce451aab91d35d018158f" "1d5e33500bc9548f800f9e248b57d1b2a9ecde79cb40c0b1398dec51ee820daf" "234dbb732ef054b109a9e5ee5b499632c63cc24f7c2383a849815dacc1727cb6" "7a7b1d475b42c1a0b61f3b1d1225dd249ffa1abb1b7f726aec59ac7ca3bf4dae" "6c4c97a17fc7b6c8127df77252b2d694b74e917bab167e7d3b53c769a6abb6d6" "e8a0c94af8c0eeec7ae0f1633d29098ea722e5765f1e9c67b49da6f3414b9bfe" "7661b762556018a44a29477b84757994d8386d6edee909409fabe0631952dad9" "fc48cc3bb3c90f7761adf65858921ba3aedba1b223755b5924398c666e78af8b" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "b9e9ba5aeedcc5ba8be99f1cc9301f6679912910ff92fdf7980929c2fc83ab4d" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))
  '(elfeed-feeds
-   '("https://www.reddit.com/r/PixelArt.rss" "https://planet.emacslife.com/atom.xml" "https://users.rust-lang.org/c/help.rss" "http://www.reddit.com/r/programming/.xml" "gemini://smol.pub/atom.xml"))
+   '("https://www.jotdown.es/feed/" "https://www.reddit.com/r/PixelArt.rss" "https://planet.emacslife.com/atom.xml" "https://users.rust-lang.org/c/help.rss" "http://www.reddit.com/r/programming/.xml" "gemini://smol.pub/atom.xml"))
  '(inhibit-startup-screen t)
- '(org-agenda-files '("/opt/inmensys/documents/worklog.org"))
+ '(org-agenda-files
+   '("~/Documents/worklog.org" "/opt/inmensys/documents/worklog.org"))
  '(package-selected-packages
-   '(ace-jump-buffer ace-window frog-jump-buffer drag-stuff adoc-mode asciidoc sticky doom-themes mood-one-theme twig-mode helm-ag ag ripgrep rg elfeed-dashboard elfeed ace-jump-helm-line ace-jump-mode elpher gruvbox-theme zenburn-theme vscode-dark-plus-theme lsp-mode req-package neotree php-mode php-runtime dumb-jump multi-web-mode yasnippet-snippets fold-this flycheck-rust auto-yasnippet rustic zzz-to-char rust-mode iedit smart-mode-line-powerline-theme flycheck lsp-ui eglot highlight-symbol git-timemachine wanderlust mu4e-conversation smartparens treemacs cycbuf web-mode elscreen tabbar lsp-javacomp helm-projectile projectile-speedbar lsp-java php-boris-minor-mode lsp-php all-the-icons smart-region color-theme-solarized ivy expand-region helm-swoop git-gutter magit vue-mode semi multiple-cursors jabber company-irony))
+   '(alert helm-rg ace-jump-buffer ace-window frog-jump-buffer drag-stuff adoc-mode asciidoc sticky doom-themes mood-one-theme twig-mode helm-ag ag ripgrep rg elfeed-dashboard elfeed ace-jump-helm-line ace-jump-mode elpher gruvbox-theme zenburn-theme vscode-dark-plus-theme lsp-mode req-package neotree php-mode php-runtime dumb-jump multi-web-mode yasnippet-snippets fold-this flycheck-rust auto-yasnippet rustic zzz-to-char rust-mode iedit smart-mode-line-powerline-theme flycheck lsp-ui eglot highlight-symbol git-timemachine wanderlust mu4e-conversation smartparens treemacs cycbuf web-mode elscreen tabbar lsp-javacomp helm-projectile projectile-speedbar lsp-java php-boris-minor-mode lsp-php all-the-icons smart-region color-theme-solarized ivy expand-region helm-swoop git-gutter magit vue-mode semi multiple-cursors jabber company-irony))
  '(php-cs-fixer-rules-fixer-part-options '("multiline_whitespace_before_semicolons" "concat_space"))
  '(projectile-enable-caching nil)
  '(warning-suppress-types '((lsp-mode))))
